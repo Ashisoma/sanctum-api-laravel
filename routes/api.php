@@ -22,11 +22,14 @@ Route::group(['middleware'=>['auth:sanctum']], function () {
     Route::post('/products', [ProductController::class, 'store']);
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
     Route::put('/products/{id}', [ProductController::class, 'update']);
-    // Route::post('products', [ProductController::class, 'store']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 
 });
 
+
 // Public routes
+Route::post('/login', [AuthController::class, 'login']);
+
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::get('/products/{id}', [ProductController::class, 'show'],);
