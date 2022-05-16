@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use PhpParser\Parser\Tokens;
 
@@ -61,7 +62,15 @@ class AuthController extends Controller
 
     public function logout(Request $request){
         // $us = auth()->token();
+        // Auth::guard()-logout();
         // $del->delete();
+        // $this->guard()->logout();
+
+        // $request->session()->invalidate();
+
+        // $request->session()->regenerateToken();
+
+        $request->user()->currentAccessToken()->delete();
         return [
             'message' => 'Logged out ',
             // 'user'=> $us,
