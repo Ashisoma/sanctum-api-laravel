@@ -70,11 +70,19 @@ class AuthController extends Controller
 
         // $request->session()->regenerateToken();
 
-        $request->user()->currentAccessToken()->delete();
-        return [
-            'message' => 'Logged out ',
-            // 'user'=> $us,
-        ];
+        try {
+            $request->user()->currentAccessToken()->delete();
+            return [
+                'message' => 'Logged out ',
+                // 'user'=> $us,
+            ];
+        } catch (\Throwable $th) {
+            return [
+                'message' => 'Logged out ',
+                'errorlog' => $th->getMessage(),
+                // 'user'=> $us,
+            ];
+        }
     }
 
 }
