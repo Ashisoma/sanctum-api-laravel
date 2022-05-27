@@ -71,11 +71,22 @@ class AuthController extends Controller
         // $request->session()->regenerateToken();
 
         try {
+            if ($request->user()->currentAccessToken() == null) {
             $request->user()->currentAccessToken()->delete();
+            # code...
             return [
                 'message' => 'Logged out ',
                 // 'user'=> $us,
             ];
+            }
+            else{
+                $response= [
+                    'message' => 'Uauthorized',
+                    // 'user'=> $us,
+                ];
+                return response($response, 403);
+            }
+            
         } catch (\Throwable $th) {
             return [
                 'message' => 'Logged out ',
